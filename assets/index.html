@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Memray DB Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+    <div class="scanline"></div>
+    <header class="topHeader">
+        <h1>Memray DB Analyzer</h1>
+        <p>CS2613 Programming Languages Lab Exploration Activity</p>
+    </header>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="card half">
+                <h2>Single Query</h2>
+                <textarea id="queryBox">SHOW TABLES</textarea>
+                <div class="buttonRow">
+                    <button class="primary" onclick="runQuery(false)">Run Query</button>
+                    <button class="secondary" onclick="runQuery(true)">Run + Profile</button>
+                </div>
+            </div>
+
+            <div class="card half">
+                <h2>Bulk Queries</h2>
+                <textarea id="bulkQueryBox">DROP TABLE IF EXISTS *;
+CREATE TABLE users (age int, id int PRIMARY KEY, fname str, lname str);
+INSERT RANDOM USERS INTO users COUNT 1000 START_ID 1 AGE_RANGE (18, 90);
+SELECT COUNT(*) FROM users;
+SELECT * FROM users WHERE id = 1;
+SHOW STATS;</textarea>
+                <div class="buttonRow">
+                    <button class="primary" onclick="runBulkQueries(false)">Run Bulk Queries</button>
+                    <button class="secondary" onclick="runBulkQueries(true)">Run Bulk + Profile</button>
+                </div>
+            </div>
+
+            <div class="card third">
+                <h2>Database Stats</h2>
+                <div id="stats" class="metrics"></div>
+            </div>
+
+            <div class="card third">
+                <h2>Memory Usage</h2>
+                <div id="memory" class="metrics"></div>
+            </div>
+
+            <div class="card third">
+                <h2>Pi Stats (10s)</h2>
+                <div id="piStats" class="metrics"></div>
+            </div>
+
+            <div class="card third">
+                <h2>RSS vs VMS</h2>
+                <div class="memoryExplain">
+                    <p><strong>RSS</strong> (Resident Set Size): memory currently in physical RAM for this process.</p>
+                    <p><strong>VMS</strong> (Virtual Memory Size): total virtual address space reserved by the process (includes mapped regions not all in RAM).</p>
+                    <p>Rule of thumb: RSS is usually the better number for “real memory pressure” on the system.</p>
+                </div>
+            </div>
+
+            <div class="card half">
+                <h2>Profiles</h2>
+                <div class="buttonRow compactRow">
+                    <button class="danger" onclick="clearProfileFiles()">Clear Profiles</button>
+                </div>
+                <div id="profiles" class="profileList"></div>
+            </div>
+
+            <div class="card half">
+                <h2>Latest Flamegraph</h2>
+                <div id="flamegraphMeta" class="flamegraphMeta">No flamegraph generated yet.</div>
+                <a id="flamegraphLink" class="flamegraphLink hidden" href="#" target="_blank" rel="noopener noreferrer">
+                    Open Latest Flamegraph In New Tab
+                </a>
+            </div>
+
+            <div class="card half">
+                <h2>Quick Examples</h2>
+                <pre>DROP TABLE IF EXISTS *
+CREATE TABLE users (age int, id int PRIMARY KEY, fname str, lname str)
+INSERT RANDOM USERS INTO users COUNT 1000 START_ID 1 AGE_RANGE (18, 90)
+SELECT COUNT(*) FROM users
+SELECT * FROM users WHERE id = 1
+SHOW * FROM users
+SHOW TABLES</pre>
+            </div>
+
+            <div class="card half">
+                <h2>Results</h2>
+                <div id="results">No query run yet.</div>
+            </div>
+        </div>
+
+        <div class="card docsCard">
+            <h2>Documentation PDFs</h2>
+            <div class="docsMeta">Open project markdown files as formatted PDFs.</div>
+            <div class="buttonRow compactRow">
+                <a class="flamegraphLink" href="/readme-pdf/README.md" target="_blank" rel="noopener noreferrer">Open README PDF</a>
+                <a class="flamegraphLink" href="/readme-pdf/MEMRAY_PACKAGE_REPORT.md" target="_blank" rel="noopener noreferrer">Open Package Report PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/app.js"></script>
+</body>
+</html>
