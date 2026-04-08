@@ -1,12 +1,10 @@
-# Memray Package Deep Dive
-
-> A focused exploration of the memory-profiling package used in this repository.
+# Memray Package Report
 
 ---
 
 ## 1. Which package/library did you select?
 
-I selected **Memray** (`memray`), an advanced memory profiler for Python applications.
+I selected **Memray**, an advanced memory profiler for Python applications.
 
 ---
 
@@ -158,7 +156,7 @@ In short, the choice was driven by **fit for purpose** (debugging memory behavio
 
 Learning Memray reinforced several Python concepts:
 
-- **Context managers** (`with`) for deterministic setup/teardown around profiling.
+- **Context managers** for deterministic setup/teardown around profiling.
 - Better understanding of Python vs native memory behavior in mixed stacks.
 - Separation of concerns:
   - capture instrumentation in backend code
